@@ -27,7 +27,7 @@ pipeline {
                     // usernamePassword() because we are using this type of credentials
                     // USERNAME & PASSWORD are variable we can use inside the bloc
                 ]){
-                    sh "Some script ${USERNAME} & ${PASSWORD}"
+                    sh "Some script ${USERNAME} ${PASSWORD}"
                 }
             }
         }
