@@ -23,7 +23,7 @@ pipeline {
                 echo "Version ${NEW_VERSION}"
 
                 withCredentials([
-                    usernamePassword(credentials: "nexus-repo-credentials", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')
+                    usernamePassword(credentialsId: "nexus-repo-credentials", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')
                     // usernamePassword() because we are using this type of credentials
                     // USERNAME & PASSWORD are variable we can use inside the bloc
                 ]){
