@@ -6,7 +6,7 @@ pipeline {
     parameters {
         string(name : "STATEMENT", defaultValue : "hello ; ls", description : "Just for testing")
         choice(name : "VERSION", choices: ['1.1', '1.2', '1.3'], description : '')
-        booleanParam(name : "executeTest", defaultValue : true, description : '')
+        booleanParam(name : "executeTests", defaultValue : true, description : '')
     }
     environment {
         NEW_VERSION="1.3.0"
@@ -16,21 +16,26 @@ pipeline {
         stage('build') {
             steps {
                 echo 'Building application ...'
-                echo "Version ${NEW_VERSION}"
+                echo "Printing environment variable ${NEW_VERSION}"
                 sh "mvn -version "
             }
         }
         stage('test') {
+            when {
+                expression {
+                    params.executeTests // It can be also params.executeTests == true
+                }
+            }
             steps {
                 echo 'Testing application ...'
-                echo "Version ${NEW_VERSION}"
+                echo "Printing environment variable ${NEW_VERSION}"
                 sh 'echo credentials script $SERVER_CREDENTIALS_USR:$SERVER_CREDENTIALS_PSW'
             }
         }
         stage('deploy') {
             steps {
                 echo 'Deploying application ...'
-                echo "Version ${NEW_VERSION}"
+                echo "Version ${params.VERSION}"
 
                 withCredentials([
                     usernamePassword(credentialsId: "nexus-repo-credentials", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')
