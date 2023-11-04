@@ -28,7 +28,7 @@ pipeline {
                     // usernamePassword() because we are using this type of credentials
                     // USERNAME & PASSWORD are variable we can use inside the bloc
                 ]){
-                    sh "echo $PASSWORD | script $USERNAME --password-stdin"
+                    sh "echo $PASSWORD | script $USERNAME -password-stdin"
                 }
             }
         }
