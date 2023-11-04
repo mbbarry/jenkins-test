@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven "maven-3.9.5"
+    }
     environment {
         NEW_VERSION="1.3.0"
         SERVER_CREDENTIALS = credentials('nexus-repo-credentials')
@@ -9,6 +12,7 @@ pipeline {
             steps {
                 echo 'Building application ...'
                 echo "Version ${NEW_VERSION}"
+                sh "echo mvn -version "
             }
         }
         stage('test') {
