@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo 'Testing application ...'
                 echo "Version ${NEW_VERSION}"
-                sh "echo credentials script ${SERVER_CREDENTIALS_USR}:${SERVER_CREDENTIALS_PSW}"
+                sh 'echo credentials script $SERVER_CREDENTIALS_USR:$SERVER_CREDENTIALS_PSW'
             }
         }
         stage('deploy') {
