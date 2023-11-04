@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         NEW_VERSION="1.3.0"
-//         SERVER_CREDENTIALS = credentials('nexus-repo-credentials')
+        SERVER_CREDENTIALS = credentials('nexus-repo-credentials')
     }
     stages {
         stage('build') {
@@ -15,6 +15,7 @@ pipeline {
             steps {
                 echo 'Testing application ...'
                 echo "Version ${NEW_VERSION}"
+                sh "echo credentials script ${SERVER_CREDENTIALS_USR}:${SERVER_CREDENTIALS_PSW}"
             }
         }
         stage('deploy') {
