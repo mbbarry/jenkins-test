@@ -17,6 +17,14 @@ pipeline {
         stage('build') {
             steps {
                 script {
+                    gv = load "script.groovy"
+                }
+                sh "mvn -version"
+            }
+        }
+        stage('build') {
+            steps {
+                script {
                     gv.buildApp()
                 }
                 sh "mvn -version"

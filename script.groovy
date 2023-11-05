@@ -13,5 +13,5 @@ def deployApp() {
     echo "Version ${params.VERSION}"
 }
 
-// all importing this file
+// allow importing this file
 return this
