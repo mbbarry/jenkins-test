@@ -29,6 +29,11 @@ pipeline {
             }
         }
         stage('test') {
+            when {
+                expression {
+                    params.executeTests // It can be also params.executeTests == true
+                }
+            }
             steps {
                 script {
                     gv.testApp()
