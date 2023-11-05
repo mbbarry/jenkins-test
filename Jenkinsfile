@@ -19,7 +19,6 @@ pipeline {
                 script {
                     gv = load "script.groovy"
                 }
-                sh "mvn -version"
             }
         }
         stage('build') {
@@ -27,20 +26,13 @@ pipeline {
                 script {
                     gv.buildApp()
                 }
-                sh "mvn -version"
             }
         }
         stage('test') {
-            when {
-                expression {
-                    params.executeTests // It can be also params.executeTests == true
-                }
-            }
             steps {
                 script {
                     gv.testApp()
                 }
-                sh 'echo credentials script $SERVER_CREDENTIALS_USR:$SERVER_CREDENTIALS_PSW'
             }
         }
         stage('deploy') {
@@ -48,13 +40,6 @@ pipeline {
                 script {
                     gv.deployApp()
                 }
-                withCredentials([
-                            usernamePassword(credentialsId: "nexus-repo-credentials", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')
-                            // usernamePassword() because we are using this type of credentials
-                            // USERNAME & PASSWORD are variable we can use inside the bloc
-                    ]){
-                        sh 'echo script $USERNAME $PASSWORD'
-                    }
             }
         }
     }
