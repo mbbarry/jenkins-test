@@ -14,7 +14,7 @@ pipeline {
         SERVER_CREDENTIALS = credentials('nexus-repo-credentials')
     }
     stages {
-        stage('build') {
+        stage('init') {
             steps {
                 script {
                     gv = load "script.groovy"
