@@ -41,15 +41,19 @@ pipeline {
             }
         }
         stage('deploy') {
-            input {
-                message "Select the environment you want to deploy to"
-                ok "Done"
-                parameters {
-                        choice(name : "ENV", choices: ['DEV', 'STAGE', 'PROD'], description : '')
-                    }
-            }
+//             input {
+//                 message "Select the environment you want to deploy to"
+//                 ok "Done"
+//                 parameters {
+//                         choice(name : "ENV", choices: ['DEV', 'STAGE', 'PROD'], description : '')
+//                         // If wanna have multiple environments, just to duplicate the line choice
+//                         // and give different name to your choices
+//                     }
+//             }
             steps {
                 script {
+                    // We also can use this instead of the attribute
+                    env.ENV = input: message "Select the environment you want to deploy to", ok "Done", parameters: choice(name : "ENV", choices: ['DEV', 'STAGE', 'PROD'], description : '')}
                     gv.deployApp()
                     echo "Deploying to ${ENV}"
                 }
