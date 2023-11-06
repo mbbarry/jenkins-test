@@ -53,7 +53,7 @@ pipeline {
             steps {
                 script {
                     // We also can use this instead of the attribute
-                    env.ENV = input: message "Select the environment you want to deploy to", ok "Done", parameters: choice(name : "ENV", choices: ['DEV', 'STAGE', 'PROD'], description : '')}
+                    env.ENV = input message: "Select the environment you want to deploy to", ok: "Done", parameters: [choice(name : "ENV", choices: ['DEV', 'STAGE', 'PROD'], description : '')]
                     gv.deployApp()
                     echo "Deploying to ${ENV}"
                 }
