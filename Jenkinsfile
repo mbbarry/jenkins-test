@@ -24,12 +24,12 @@ pipeline {
             }
         }
         stage('deploy') {
-            steps {
-                when {
-                    expression {
-                        BRANCH_NAME == 'master'
-                    }
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
                 }
+            }
+            steps {
                 echo 'Deploying $BRANCH_NAME'
             }
         }
