@@ -1,7 +1,7 @@
 def buildApp() {
     echo 'Building application ...'
 //    echo "Printing environment variable ${NEW_VERSION}"
-    sh "mvn build"
+//    sh "mvn build"
 }
 
 def testApp() {
