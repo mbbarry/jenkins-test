@@ -25,7 +25,7 @@ def deployApp() {
     ]){
         sh 'docker build -t 143.198.46.19:8083/jenkins-test:1.1 .'
         sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin 143.198.46.19:8083'
-        sh 'docker push 143.198.46.19:8083/jenkins-test:1.1d'
+        sh 'docker push 143.198.46.19:8083/jenkins-test:1.1'
     }
 }
 
