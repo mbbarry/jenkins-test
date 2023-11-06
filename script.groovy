@@ -7,6 +7,7 @@ def buildApp() {
 def testApp() {
     echo 'Testing application ...'
     echo "Printing environment variable ${NEW_VERSION}"
+    sh 'echo credentials script $SERVER_CREDENTIALS_USR:$SERVER_CREDENTIALS_PSW'
 }
 
 def deployApp() {
