@@ -40,6 +40,13 @@ pipeline {
                 }
             }
         }
+        stage('buildJar') {
+            steps {
+                script {
+                    gv.buildJar()
+                }
+            }
+        }
         stage('deploy') {
 //             input {
 //                 message "Select the environment you want to deploy to"

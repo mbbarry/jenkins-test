@@ -1,26 +1,32 @@
 def buildApp() {
     echo 'Building application ...'
-    echo "Printing environment variable ${NEW_VERSION}"
-    sh "mvn -version"
+//    echo "Printing environment variable ${NEW_VERSION}"
+    sh "mvn build"
 }
 
 def testApp() {
     echo 'Testing application ...'
-    echo "Printing environment variable ${NEW_VERSION}"
-    sh 'echo credentials script $SERVER_CREDENTIALS_USR:$SERVER_CREDENTIALS_PSW'
+//    echo "Printing environment variable ${NEW_VERSION}"
+//    sh 'echo credentials script $SERVER_CREDENTIALS_USR:$SERVER_CREDENTIALS_PSW'
+}
+
+def buildJar() {
+    echo 'Building jar file ...'
+    sh "mvn package"
 }
 
 def deployApp() {
     echo 'Deploying application ...'
-    echo "Version ${params.VERSION}"
+//    echo "Version ${params.VERSION}"
     withCredentials([
             usernamePassword(credentialsId: "nexus-repo-credentials", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')
             // usernamePassword() because we are using this type of credentials
             // USERNAME & PASSWORD are variable we can use inside the bloc
     ]){
-        sh 'echo script $USERNAME $PASSWORD'
+        sh 'docker build -t 143.198.46.19:8083/jenkins-test:1.0 .'
+        sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin 143.198.46.19:8083'
+        sh 'docker push 143.198.46.19:8083/jenkins-test:1.0'
     }
 }
 
-// allow importing this file
 return this
