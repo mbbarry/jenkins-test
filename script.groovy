@@ -23,9 +23,9 @@ def deployApp() {
             // usernamePassword() because we are using this type of credentials
             // USERNAME & PASSWORD are variable we can use inside the bloc
     ]){
-        sh 'docker build -t 143.198.46.19:8083/jenkins-test:1.0 .'
+        sh 'docker build -t 143.198.46.19:8083/jenkins-test:1.1 .'
         sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin 143.198.46.19:8083'
-        sh 'docker push 143.198.46.19:8083/jenkins-test:1.0'
+        sh 'docker push 143.198.46.19:8083/jenkins-test:1.1d'
     }
 }
 
